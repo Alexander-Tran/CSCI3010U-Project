@@ -1,5 +1,6 @@
 # CSCI3010U-Project
-Name: Alexander Tran\n
+
+Name: Alexander Tran<br />
 Student Number: 100788359
 
 CSCI3010U Project: Bullet Simulation
