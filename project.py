@@ -98,14 +98,12 @@ class Simulation:
         #Fd = 1/2 * p * Cd * A
         Fd = 0.5 * self.p * self.Cd * (self.A / 1550.0)
 
-        ax = -(Fd * self.vx) / self.mass #Acceleration x
-        ay = -arg2 - ((Fd * self.vy) / self.mass) #Acceleration y
+        ax = -(Fd * self.vx) / self.mass #Acceleration x w/ air resistance
+        ay = -arg2 - ((Fd * self.vy) / self.mass) #Acceleration y w/ air resistance
 
-        #Calculate coriolis force
-        az = (2.0 * np.sqrt((self.vx**2 + self.vy**2)) * self.omega * self.alpha) / self.mass
-
-        #Calculate wind force
-        az += self.wind * np.sqrt(self.vx**2 + self.vy**2) / self.mass / 1000.0
+        az = -(Fd * np.sqrt((self.vx**2 + self.vy**2))) / self.mass #Acceleration z w/ air resistance
+        az += (2.0 * np.sqrt((self.vx**2 + self.vy**2)) * self.omega * self.alpha) / self.mass #Calculate coriolis force
+        az += self.wind * np.sqrt(self.vx**2 + self.vy**2) / self.mass / 1000.0 #Calculate force due to wind
         
         dstate = np.array([self.vx, self.vy, self.vz, ax, ay, az])
              
